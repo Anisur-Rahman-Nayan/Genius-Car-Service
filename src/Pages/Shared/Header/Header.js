@@ -37,7 +37,9 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Nav>
+
             <Nav.Link as={Link} to="/about">About</Nav.Link>
+           
            { user ? 
                   <button className='btn btn-link text-white text-decoration-none' onClick={()=>signOut(auth)}>Sign Out</button>
            : <Nav.Link as={Link} to="/login">
