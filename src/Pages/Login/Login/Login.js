@@ -87,9 +87,8 @@ const Login = () => {
     <p>New to Genius Car ?<Link to='/register' className='text-primary pe-auto text-decoration-none' onClick={navigateRegister}> Please Register</Link></p>
     <p>Forget Password ?<Link to='/register' className='text-primary pe-auto text-decoration-none' onClick={resetPassword}> Reset Password</Link></p>
        
-
       <SocialLogin></SocialLogin>
-
+       
         </div>
     );
 };
