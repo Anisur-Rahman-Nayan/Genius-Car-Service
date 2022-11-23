@@ -1,11 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import { async } from '@firebase/util';
+
 
 const Register = () => {
+
+
+  const [agree, setAgree] = useState(false)
 
     const navigate = useNavigate()
     let location = useLocation();
@@ -16,20 +21,27 @@ const Register = () => {
         user,
         loading,
         error,
-      ] = useCreateUserWithEmailAndPassword(auth);
+      ] = useCreateUserWithEmailAndPassword(auth , {sendEmailVerification: true});
+
+      const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
 
 const navigateRegister=()=>{
     navigate('/login');
 }
 
-const handleSubmit=(e)=>{
+const handleSubmit= async (e)=>{
     e.preventDefault()
     const name = e.target.name.value
     const email = e.target.email.value
     const password = e.target.password.value;
-    createUserWithEmailAndPassword(email, password)
-    // console.log(name,email,password)
+    // const agree = e.target.terms.checked;
+
+    
+      await createUserWithEmailAndPassword(email, password)
+      await updateProfile({ displayName: name});
+            alert('Updated profile');
+  // console.log(name,email,password)
 }
 
 if(user){
@@ -59,9 +71,9 @@ if(user){
         <Form.Control type="password" placeholder="Password" name='password' required />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" name='terms' id='terms' label="Accept Genius Car Terms and Conditions" />
+        <Form.Check className={agree ? 'text-success':'text-danger'} type="checkbox" onClick={()=>setAgree(!agree)} name='terms' id='terms'  label="Accept Genius Car Terms and Conditions" />
       </Form.Group>
-      <Button variant="primary w-50 mx-auto d-block mb-2" type="submit">
+      <Button disabled={!agree} variant="primary w-50 mx-auto d-block mb-2" type="submit">
         Register
       </Button>
     </Form>
