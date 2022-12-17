@@ -7,10 +7,16 @@ const Services = () => {
 
 const [services, setServices] = useState([])
     
+    // useEffect(()=>{
+    //     fetch('services.json')
+    //     .then(res=> res.json())
+    //     .then(data=>setServices(data))
+    // },[])
+
     useEffect(()=>{
-        fetch('services.json')
-        .then(res=> res.json())
-        .then(data=>setServices(data))
+        fetch('http://localhost:5000/services')
+        .then(res => res.json())
+        .then(data=> setServices(data))
     },[])
 
     return (
@@ -18,7 +24,7 @@ const [services, setServices] = useState([])
             <h1 className='services-title mt-5'>Our Services</h1>
         <div  className='services-container'>
             {
-                services.map(service => <Service service={service} key={service.id}></Service>)
+                services.map(service => <Service service={service} key={service._id}></Service>)
             }
         </div>
         </div>

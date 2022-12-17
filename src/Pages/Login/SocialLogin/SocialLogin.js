@@ -11,7 +11,7 @@ const SocialLogin = () => {
     const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
     const navigate = useNavigate();
 
-    
+    console.log(user)    
 
     let errorElement;
 
