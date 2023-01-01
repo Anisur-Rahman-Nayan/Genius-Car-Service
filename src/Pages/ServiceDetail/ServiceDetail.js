@@ -17,7 +17,7 @@ const ServiceDetail = () => {
             <h4 className='text-center'>Welcome! You are about to book: {service.name}</h4>
             <img  src={service.img} alt="" />
             <div className='text-center'>
-            <Link to='/checkout'> <button className='btn btn-primary'>Proceed Checkout</button> </Link>
+            <Link to={`/checkout/${serviceId}`}> <button className='btn btn-primary'>Proceed Checkout</button> </Link>
             </div>
         </div>
     );

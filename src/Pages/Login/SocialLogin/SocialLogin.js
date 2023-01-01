@@ -4,12 +4,15 @@ import facebook from '../../../images/facebook-removebg-preview.png'
 import github from '../../../images/github-removebg-preview.png'
 import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
     const navigate = useNavigate();
+    let location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     console.log(user)    
 
@@ -20,7 +23,7 @@ const SocialLogin = () => {
         }
 
       if(user || user1){
-        navigate('/home')
+        navigate(from,{replace: true})
       }
 
 
