@@ -12,7 +12,7 @@ const ManageServices = () => {
     // },[])
 
     useEffect(()=>{
-        fetch('http://localhost:5000/services')
+        fetch('https://genius-car-service-server.up.railway.app/services')
         .then(res => res.json())
         .then(data=> setServices(data))
     },[])
@@ -21,7 +21,7 @@ const ManageServices = () => {
         const proceed = window.confirm("Are You Sure ?");
         if(proceed){
             // console.log(id) 
-            const url= `http://localhost:5000/service/${id}`
+            const url= `https://genius-car-service-server.up.railway.app/service/${id}`
             fetch(url,{
                 method: 'DELETE'
             })

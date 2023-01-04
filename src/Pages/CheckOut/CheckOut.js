@@ -9,7 +9,7 @@ const CheckOut = () => {
     const {serviceId} = useParams()
     const [service, setService] = useState({})
     useEffect(()=>{
-        const url = `http://localhost:5000/service/${serviceId}`
+        const url = `https://genius-car-service-server.up.railway.app/service/${serviceId}`
         fetch(url)
         .then(res=>res.json())
         .then(data=> setService(data))
@@ -26,7 +26,7 @@ const CheckOut = () => {
             phone: e.target.phone.value,
         }
         // console.log(order)
-        axios.post('http://localhost:5000/order',order)
+        axios.post('https://genius-car-service-server.up.railway.app/order',order)
         .then(res=> {
             const {data} = res;
             if(data.insertedId){

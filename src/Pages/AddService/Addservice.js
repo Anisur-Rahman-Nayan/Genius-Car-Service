@@ -5,7 +5,7 @@ const Addservice = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data =>{
         console.log(data)
-        const url = `http://localhost:5000/service`
+        const url = `https://genius-car-service-server.up.railway.app/service`
         fetch(url,{
             method: 'POST', // or 'PUT'
   headers: {
